@@ -1,8 +1,6 @@
 # 文件
-/字频频率统计.spec
+/Binary转换Ascii工具.spec
 
 # 文件夹
-UI/__pycache__/
+/bin/
 __pycache__/
-字频频率统计/
-bin/
