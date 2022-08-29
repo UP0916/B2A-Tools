@@ -162,4 +162,4 @@ class Ui_MainWindow(object):
         self.label_9.setText(_translate("MainWindow", "          每个字节依次倒序后转换Ascii码:"))
         self.label_6.setText(_translate("MainWindow", "[7Bit]:"))
         self.label_5.setText(_translate("MainWindow", "[8Bit]:"))
-from myqplantextedit import MyQPlanTextEdit
+from src.GUI.myqplantextedit import MyQPlanTextEdit
