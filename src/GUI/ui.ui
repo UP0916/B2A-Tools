@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>658</width>
-    <height>606</height>
+    <height>615</height>
    </rect>
   </property>
   <property name="font">
@@ -22,7 +22,7 @@
    <string>Binary转换Ascii工具   作者:Byxs20</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
