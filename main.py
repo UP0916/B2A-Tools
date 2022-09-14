@@ -1,4 +1,5 @@
 import sys
+import libnum
 from src import GUI
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
@@ -33,12 +34,15 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
         ''' bin_str 0和1交换 '''
         return "".join("1" if i == "0" else "0" for i in bin_str)
 
+    def ascii_stand(self, int_num):
+        # 如果127 >= num >= 32,那就是可见字符,不可见字符统统转换为`~`(波浪线)
+        return chr(int_num) if 127 >= int_num >= 32 else chr(126)
+
     def binary_to_ascii(self, bin_str, bit, reverse=False):
         ascii_str = ""
         for i in range(0, len(bin_str), bit):
             bin_ = bin_str[i:i + bit][::-1] if reverse else bin_str[i:i + bit]
-            # 如果127 >= num >= 32,那就是可见字符,不可见字符统统转换为`~`(波浪线)
-            ascii_str += chr(num) if 127 >= (num := int(bin_, 2)) >= 32 else chr(126)
+            ascii_str += self.ascii_stand(int(bin_, 2))
         return ascii_str
 
     def Normal_Conversion(self, bin_str):
@@ -50,6 +54,9 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
     def special_Conversion2(self, bin_str):
         return [self.binary_to_ascii(bin_str, 7, True), self.binary_to_ascii(bin_str, 8, True)]
 
+    def b2s(self, bin_str):
+        return "".join(self.ascii_stand(num) for num in libnum.b2s(bin_str))
+                
     def Conversion(self):
         # 判断是否输入框是否为空
         if (bin_str := self.get_text()) is not None:
@@ -66,7 +73,7 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
                 special_list2 = self.special_Conversion2(bin_str)
 
                 # 判断是否有flag字段
-                ascii_list = normal_list + special_list + special_list2
+                ascii_list = normal_list + special_list + special_list2 + [self.b2s(bin_str)]
                 self.show_info(ascii_list)
 
     def set_planTextEdit(self, ascii_str, index):
@@ -82,14 +89,18 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
             self.plainTextEdit_6.setPlainText(ascii_str)
         elif index == 5:
             self.plainTextEdit_7.setPlainText(ascii_str)
+        elif index == 6:
+            self.plainTextEdit_9.setPlainText(ascii_str)
 
     def show_info(self, ascii_list):
         self.plainTextEdit_8.setPlainText("")
         for index, ascii_str in enumerate(ascii_list):
-            if "flag" in ascii_str.lower():
+            if "flag" in ascii_str.lower() and index == len(ascii_list) - 1:
+                self.plainTextEdit_8.insertPlainText(f"FLAG可能在左边的输出框\n")
+            elif "flag" in ascii_str.lower():
                 self.plainTextEdit_8.insertPlainText(f"FLAG可能在右边第{index + 1}输出框\n")
             self.set_planTextEdit(ascii_str, index)
-
+            
 
 if __name__ == "__main__":
     QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling) # DPI自适应
