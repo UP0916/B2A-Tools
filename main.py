@@ -46,7 +46,7 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
         return ascii_str
 
     def Normal_Conversion(self, bin_str):
-        return [self.binary_to_ascii(bin_str, 7), self.binary_to_ascii(bin_str, 8)]
+        return [self.binary_to_ascii(bin_str, 7), self.b2s(bin_str)]
     
     def special_Conversion(self, bin_str):
         return [self.binary_to_ascii(bin_str, 7), self.binary_to_ascii(bin_str, 8)]
@@ -73,7 +73,7 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
                 special_list2 = self.special_Conversion2(bin_str)
 
                 # 判断是否有flag字段
-                ascii_list = normal_list + special_list + special_list2 + [self.b2s(bin_str)]
+                ascii_list = normal_list + special_list + special_list2
                 self.show_info(ascii_list)
 
     def set_planTextEdit(self, ascii_str, index):
@@ -89,21 +89,16 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
             self.plainTextEdit_6.setPlainText(ascii_str)
         elif index == 5:
             self.plainTextEdit_7.setPlainText(ascii_str)
-        elif index == 6:
-            self.plainTextEdit_9.setPlainText(ascii_str)
 
     def show_info(self, ascii_list):
         self.plainTextEdit_8.setPlainText("")
         for index, ascii_str in enumerate(ascii_list):
-            if "flag" in ascii_str.lower() and index == len(ascii_list) - 1:
-                self.plainTextEdit_8.insertPlainText(f"FLAG可能在左边的输出框\n")
-            elif "flag" in ascii_str.lower():
-                self.plainTextEdit_8.insertPlainText(f"FLAG可能在右边第{index + 1}输出框\n")
+            if "flag" in ascii_str.lower():
+                self.plainTextEdit_8.appendPlainText(f"FLAG可能在右边第{index + 1}输出框")
             self.set_planTextEdit(ascii_str, index)
-            
 
 if __name__ == "__main__":
-    QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling) # DPI自适应
+    # QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling) # DPI自适应
     app = QApplication(sys.argv)
     ui = Main()
     ui.show()
