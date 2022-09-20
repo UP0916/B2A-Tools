@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(630, 504)
+        MainWindow.resize(703, 494)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         MainWindow.setFont(font)
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 601, 451))
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 10, 671, 451))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
