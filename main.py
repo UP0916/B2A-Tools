@@ -35,8 +35,8 @@ class Main(QMainWindow, GUI.Ui_MainWindow):
         return "".join("1" if i == "0" else "0" for i in bin_str)
 
     def ascii_stand(self, int_num):
-        # 如果127 >= num >= 32,那就是可见字符,不可见字符统统转换为`~`(波浪线)
-        return chr(int_num) if 127 >= int_num >= 32 else chr(126)
+        # 如果32 <= int_num < 127,那就是可见字符,不可见字符统统转换为`~`(波浪线)
+        return chr(int_num) if 32 <= int_num < 127 else "~"
 
     def binary_to_ascii(self, bin_str, bit, reverse=False):
         ascii_str = ""
